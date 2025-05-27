@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Who's thiss</title>
+  <link rel="icon" href="icons/thinking.png">
+  <style>
+    .main{
+      margin-left: 620px;
+      margin-top: 340px;
+      color: whitesmoke;
+    }
+  </style>
+</head>
+<body style="background-color: black;">
+  <div class="main">
+    Enter Password : <input type="password" id="password" placeholder="the word i call you" autocomplete="off">
+    <img class="icon" id="hidden" src="icons/hidden.png" height="20" style="position: relative;left: -28px;top: 6px;cursor: pointer;" onclick="showpass()"><br>
+    <a href="redirect.html" style="margin-left: 60px;">don't know</a>
+    <button id="verifyBtn" onclick="checker()" style="cursor: pointer;margin-left: 40px;margin-top: 10px;">Verify</button>
+  </div>
+  
+  <script>
+    function checker()
+    {
+      if(document.getElementById('password').value.toLowerCase()=='chutney' && new Date()>=new Date("2025-05-30T00:00:00")) location.href='bday.html'
+      else if(document.getElementById('password').value.toLowerCase()=='chutney') location.href='waiting.html'
+      else location.href='redirect.html';
+    }
+
+    function showpass()
+    {
+      let img=document.getElementsByClassName('icon');
+      if(img.length>0 && img[0].id=='hidden')
+      {
+        document.getElementById('password').type='text';
+        img[0].src='icons/eye.png'
+        img[0].id='eye';
+      }
+      else
+      {
+        document.getElementById('password').type='password';
+        img[0].src='icons/hidden.png'
+        img[0].id='hidden';
+      }
+      console.log();
+    }
+
+    document.addEventListener("keydown",function(event) {
+      if (event.key==="Enter") {
+        document.getElementById("verifyBtn").click();
+      }
+    });
+  </script>
+</body>
+</html>

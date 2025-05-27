@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>It's all about time</title>
+  <link rel="icon" href="icons/timmer.png">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <span id="timmer" style="font-size: xx-large;font-weight: bolder;color: whitesmoke;"></span>
+  </div>
+
+  <script>
+    setInterval(()=>{
+      const now = new Date().getTime();
+      const target = new Date("2025-05-30T00:00:00").getTime();
+      const remaining = target - now;
+
+      if (remaining <= 0) {
+        window.location.href='bday.html';
+        return;
+      }
+
+      const totalHours = Math.floor(remaining / (1000 * 60 * 60));
+      const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+      document.getElementById('timmer').innerText =
+        `${totalHours.toString().padStart(2, '0')}:` +
+        `${minutes.toString().padStart(2, '0')}:` +
+        `${seconds.toString().padStart(2, '0')}`;
+    },1000)
+  </script>
+</body>
+</html>
