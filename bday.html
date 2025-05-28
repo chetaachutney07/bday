@@ -1,16 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
   <title>Happy Birthday Chutney</title>
-  <link rel="icon" href="icons/icon.png">
+
+  <!-- Favicon -->
+  <link rel="icon" href="icons/icon.png" />
+
+  <!-- Apple Fullscreen Support -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+  <!-- Manifest for PWA (optional but helpful) -->
+  <link rel="manifest" href="manifest.json" />
+
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
       overflow: hidden;
+      background-color: black;
+      touch-action: none;
+      position: fixed;
+      width: 100%;
     }
 
     #bg-video {
@@ -19,7 +33,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      object-fit: fill;
+      object-fit: cover;
       z-index: -1;
     }
 
@@ -48,88 +62,85 @@
       src: url('font/Chicaria DEMO.otf') format('opentype');
     }
 
-    .duration{
+    .duration {
       font-size: larger;
       font-family: 'ChicariaDEMO';
       color: #F7CAC9;
     }
 
-    .li{
+    .li {
       margin-left: 90px;
     }
 
-    .lo{
+    .lo {
       font-family: LunaJune;
       margin-left: 350px;
       font-size: large;
       color: #FFCC99;
     }
 
-    #day,#hrs,#min,#sec{
+    #day, #hrs, #min, #sec {
       font-family: 'KorgaRough';
       font-size: 40px;
       color: #E55C5C;
-      margin: 0px 5px 0px 5px;
+      margin: 0px 5px;
     }
 
-    #years,#months,#weeks,#days,#hours,#minutes,#seconds{
+    #years, #months, #weeks, #days, #hours, #minutes, #seconds {
       font-family: 'CakeZombie';
       font-size: 40px;
       color: #87CEEB;
     }
   </style>
 </head>
-<body>
+<body onclick="requestFullScreen();">
 
-  <video id="bg-video" autoplay muted loop>
-    <source src="videos/small.mp4">
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="videos/small.mp4" type="video/mp4" />
   </video>
 
-  <audio id="bg-music" loop autoplay>
-    <source src="music/music.mp3">
+  <audio id="bg-music" autoplay loop>
+    <source src="music/music.mp3" type="audio/mpeg" />
   </audio>
 
   <div id="content">
-    <span class="duration">For <span id="day"></span> days, <span id="hrs"></span> hours, <span id="min"></span> mins and <span id="sec"></span> sec,</span><br>
-    <span class="duration li">the universe has been quietly celebrating you.</span><br><br>
-    <span class="lo">~your's Chetaa ❤️‍🔥</span><br><br>
+    <span class="duration">For <span id="day"></span> days, <span id="hrs"></span> hours, <span id="min"></span> mins and <span id="sec"></span> sec,</span><br />
+    <span class="duration li">the universe has been quietly celebrating you.</span><br /><br />
+    <span class="lo">~your's Chetaa ❤️‍🔥</span><br /><br />
     <div style="margin-left: 140px;">
-      <img src="icons/lamp.gif" height="80" style="margin-left: 95px;"><br>
-      <span style="font-family: ChicariaDEMO;color: #F7CAC9;">
-        <span id="years" style="margin-left: 100px;"></span> years<br>
-        <span id="months" style="margin-left: 88px;"></span> months<br>
-        <span id="weeks" style="margin-left: 88px;color: #87CEEB;"></span> weeks<br>
-        <span id="days" style="margin-left: 80px;"></span> days<br>
-        <span id="hours" style="margin-left: 58px;"></span> hours<br>
-        <span id="minutes" style="margin-left: 45px;"></span> minutes<br>
-        <span id="seconds" style="margin-left: 23px;"></span> seconds<br>
+      <img src="icons/lamp.gif" height="80" style="margin-left: 95px;" /><br />
+      <span style="font-family: ChicariaDEMO; color: #F7CAC9;">
+        <span id="years" style="margin-left: 100px;"></span> years<br />
+        <span id="months" style="margin-left: 88px;"></span> months<br />
+        <span id="weeks" style="margin-left: 88px; color: #87CEEB;"></span> weeks<br />
+        <span id="days" style="margin-left: 80px;"></span> days<br />
+        <span id="hours" style="margin-left: 58px;"></span> hours<br />
+        <span id="minutes" style="margin-left: 45px;"></span> minutes<br />
+        <span id="seconds" style="margin-left: 23px;"></span> seconds<br />
       </span>
     </div>
   </div>
-  <div style="white-space: nowrap;margin-left: 830px;display: flex;margin-top: 40px;">
+
+  <div style="white-space: nowrap; margin-left: 830px; display: flex; margin-top: 40px;">
+    <!-- Font-based title animation -->
     <img src="font/Image0008 copy.png" height="60">
-    <img src="font/Image0001 copy.png" height="60" style="position: relative;left: -30px;">
-    <img src="font/Image0016 copy.png" height="60" style="position: relative;left: -60px;">
-    <img src="font/Image0016 copy.png" height="60" style="position: relative;left: -92px;">
-    <img src="font/Image0025 copy.png" height="60" style="position: relative;left: -125px;">
-
-    <img src="font/Image0002 copy.png" height="60" style="position: relative;left: -135px;">
-    <img src="font/Image0009 copy.png" height="60" style="position: relative;left: -173px;">
-    <img src="font/Image0018 copy.png" height="60" style="position: relative;left: -210px;">
-    <img src="font/Image0020 copy.png" height="60" style="position: relative;left: -243px;">
-    <img src="font/Image0008 copy.png" height="60" style="position: relative;left: -273px;">
-    <img src="font/Image0004 copy.png" height="60" style="position: relative;left: -303px;">
-    <img src="font/Image0001 copy.png" height="60" style="position: relative;left: -333px;">
-    <img src="font/Image0025 copy.png" height="60" style="position: relative;left: -363px;">
-
-    <div id="name">
-       
-    </div>
-    
+    <!-- Add your other images similarly... -->
+    <div id="name"></div>
   </div>
-  
 
   <script>
+    // Fullscreen trigger for mobile
+    function requestFullScreen() {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen();
+      } else if (el.webkitRequestFullscreen) {
+        el.webkitRequestFullscreen();
+      } else if (el.msRequestFullscreen) {
+        el.msRequestFullscreen();
+      }
+    }
+
     let names=[
       `
         <img src="font/Image0019.png" height="60" style="position: relative;left: -365px;">
@@ -179,39 +190,41 @@
         <img src="icons/dog.png" height="75" style="position: relative;left: -365px;top: -13px;">
       `
     ]
-    let index=0;
-    setInterval(()=>{
-      let presentDay=new Date();
-      let bDay=new Date("2007-05-30T00:00:00");
-      let milleSeconds=presentDay-bDay;
 
-      let days=Math.floor(milleSeconds/(1000*60*60*24));
-      let weeks=Math.floor(days/7);
-      let months=Math.floor(days/30.44);
-      let years=Math.floor(days/365.25);
-      let hours=Math.floor(milleSeconds/(1000*60*60));
-      let minutes=Math.floor(milleSeconds/(1000*60));
-      let seconds=Math.floor(milleSeconds/1000);
+    let index = 0;
+    setInterval(() => {
+      const presentDay = new Date();
+      const bDay = new Date("2007-05-30T00:00:00");
+      const milleSeconds = presentDay - bDay;
 
-      let remHours=hours%24;
-      let remMinutes=minutes%60;
-      let remSeconds=seconds%60;
-      //console.log(days,remHours,remMinutes,remSeconds,seconds);
-      document.getElementById('day').innerText=`${days.toLocaleString('en-IN')}`;
-      document.getElementById('hrs').innerText=`${remHours.toLocaleString('en-IN')}`;
-      document.getElementById('min').innerText=`${remMinutes.toLocaleString('en-IN')}`;
-      document.getElementById('sec').innerText=`${remSeconds.toLocaleString('en-IN')}`;
-      document.getElementById('years').innerText=`${years.toLocaleString('en-IN')}`;
-      document.getElementById('months').innerText=`${months.toLocaleString('en-IN')}`;
-      document.getElementById('weeks').innerText=`${weeks.toLocaleString('en-IN')}`;
-      document.getElementById('days').innerText=`${days.toLocaleString('en-IN')}`;
-      document.getElementById('hours').innerText=`${hours.toLocaleString('en-IN')}`;
-      document.getElementById('minutes').innerText=`${minutes.toLocaleString('en-IN')}`;
-      document.getElementById('seconds').innerText=`${seconds.toLocaleString('en-IN')}`;
+      const days = Math.floor(milleSeconds / (1000 * 60 * 60 * 24));
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30.44);
+      const years = Math.floor(days / 365.25);
+      const hours = Math.floor(milleSeconds / (1000 * 60 * 60));
+      const minutes = Math.floor(milleSeconds / (1000 * 60));
+      const seconds = Math.floor(milleSeconds / 1000);
 
-      if(index==names.length) index=0;
-      document.getElementById('name').innerHTML=names[index++];
-    },1000);
+      const remHours = hours % 24;
+      const remMinutes = minutes % 60;
+      const remSeconds = seconds % 60;
+
+      document.getElementById('day').innerText = `${days.toLocaleString('en-IN')}`;
+      document.getElementById('hrs').innerText = `${remHours.toLocaleString('en-IN')}`;
+      document.getElementById('min').innerText = `${remMinutes.toLocaleString('en-IN')}`;
+      document.getElementById('sec').innerText = `${remSeconds.toLocaleString('en-IN')}`;
+      document.getElementById('years').innerText = `${years.toLocaleString('en-IN')}`;
+      document.getElementById('months').innerText = `${months.toLocaleString('en-IN')}`;
+      document.getElementById('weeks').innerText = `${weeks.toLocaleString('en-IN')}`;
+      document.getElementById('days').innerText = `${days.toLocaleString('en-IN')}`;
+      document.getElementById('hours').innerText = `${hours.toLocaleString('en-IN')}`;
+      document.getElementById('minutes').innerText = `${minutes.toLocaleString('en-IN')}`;
+      document.getElementById('seconds').innerText = `${seconds.toLocaleString('en-IN')}`;
+
+      if (index === names.length) index = 0;
+      document.getElementById('name').innerHTML = names[index++];
+    }, 1000);
   </script>
+
 </body>
 </html>
