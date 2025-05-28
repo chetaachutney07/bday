@@ -1,16 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
   <title>Happy Birthday Chutney</title>
-  <link rel="icon" href="icons/icon.png">
+  <link rel="icon" href="icons/icon.png" />
+
+  <!-- Fonts -->
+  <style>
+    @font-face {
+      font-family: 'KorgaRough';
+      src: url('font/Korga Rough.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'CakeZombie';
+      src: url('font/CakeZombie.ttf') format('truetype');
+    }
+    @font-face {
+      font-family: 'LunaJune';
+      src: url('font/Luna June.otf') format('opentype');
+    }
+    @font-face {
+      font-family: 'ChicariaDEMO';
+      src: url('font/Chicaria DEMO.otf') format('opentype');
+    }
+  </style>
+
+  <!-- Styles -->
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      background: black;
       overflow: hidden;
+      color: white;
     }
 
     #bg-video {
@@ -19,199 +43,205 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      object-fit: fill;
+      object-fit: cover;
       z-index: -1;
     }
 
+    #main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: center;
+      padding: 20px;
+      max-width: 100vw;
+      box-sizing: border-box;
+    }
+
     #content {
-      margin-left: 870px;
-      margin-top: 20px;
+      max-width: 90vw;
     }
 
-    @font-face {
-      font-family: 'KorgaRough';
-      src: url('font/Korga Rough.ttf') format('truetype');
-    }
-
-    @font-face {
-      font-family: 'CakeZombie';
-      src: url('font/CakeZombie.ttf') format('truetype');
-    }
-
-    @font-face {
-      font-family: 'LunaJune';
-      src: url('font/Luna June.otf') format('opentype');
-    }
-
-    @font-face {
-      font-family: 'ChicariaDEMO';
-      src: url('font/Chicaria DEMO.otf') format('opentype');
-    }
-
-    .duration{
-      font-size: larger;
+    .duration {
+      font-size: 1.2em;
       font-family: 'ChicariaDEMO';
       color: #F7CAC9;
     }
 
-    .li{
-      margin-left: 90px;
+    .li {
+      margin-top: 5px;
     }
 
-    .lo{
-      font-family: LunaJune;
-      margin-left: 350px;
-      font-size: large;
+    .lo {
+      font-family: 'LunaJune';
+      font-size: 1.2em;
       color: #FFCC99;
+      margin-top: 10px;
+      display: block;
     }
 
-    #day,#hrs,#min,#sec{
-      font-family: 'KorgaRough';
-      font-size: 40px;
-      color: #E55C5C;
-      margin: 0px 5px 0px 5px;
+    .time-details {
+      margin-top: 20px;
     }
 
-    #years,#months,#weeks,#days,#hours,#minutes,#seconds{
+    .time-details span {
       font-family: 'CakeZombie';
-      font-size: 40px;
+      font-size: 1.5em;
       color: #87CEEB;
+      display: block;
+    }
+
+    #day, #hrs, #min, #sec {
+      font-family: 'KorgaRough';
+      font-size: 2em;
+      color: #E55C5C;
+    }
+
+    #name-animation {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 40px;
+    }
+
+    .name-base, #name {
+      display: flex;
+      gap: 5px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
+    .name-base img, #name img {
+      height: 60px;
+    }
+
+    @media (max-width: 768px) and (orientation: landscape) {
+      .name-base img, #name img {
+        height: 50px;
+      }
+      .time-details span {
+        font-size: 1.2em;
+      }
     }
   </style>
 </head>
-<body>
+<body onclick="requestFullScreen();">
 
-  <video id="bg-video" autoplay muted loop>
-    <source src="videos/small.mp4">
+  <!-- Background Video -->
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="videos/small.mp4" type="video/mp4" />
   </video>
 
-  <audio id="bg-music" loop autoplay>
-    <source src="music/music.mp3">
+  <!-- Background Music -->
+  <audio id="bg-music" autoplay loop>
+    <source src="music/music.mp3" type="audio/mpeg" />
   </audio>
 
-  <div id="content">
-    <span class="duration">For <span id="day"></span> days, <span id="hrs"></span> hours, <span id="min"></span> mins and <span id="sec"></span> sec,</span><br>
-    <span class="duration li">the universe has been quietly celebrating you.</span><br><br>
-    <span class="lo">~your's Chetaa ❤️‍🔥</span><br><br>
-    <div style="margin-left: 140px;">
-      <img src="icons/lamp.gif" height="80" style="margin-left: 95px;"><br>
-      <span style="font-family: ChicariaDEMO;color: #F7CAC9;">
-        <span id="years" style="margin-left: 100px;"></span> years<br>
-        <span id="months" style="margin-left: 88px;"></span> months<br>
-        <span id="weeks" style="margin-left: 88px;color: #87CEEB;"></span> weeks<br>
-        <span id="days" style="margin-left: 80px;"></span> days<br>
-        <span id="hours" style="margin-left: 58px;"></span> hours<br>
-        <span id="minutes" style="margin-left: 45px;"></span> minutes<br>
-        <span id="seconds" style="margin-left: 23px;"></span> seconds<br>
-      </span>
+  <!-- Main Content -->
+  <div id="main-wrapper">
+    <div id="content">
+      <span class="duration">For <span id="day"></span> days, <span id="hrs"></span> hours, <span id="min"></span> mins and <span id="sec"></span> sec,</span><br />
+      <span class="duration li">the universe has been quietly celebrating you.</span><br />
+      <span class="lo">~your's Chetaa ❤️‍🔥</span>
+
+      <div class="time-details">
+        <img src="icons/lamp.gif" height="80" /><br />
+        <span id="years"></span> years<br />
+        <span id="months"></span> months<br />
+        <span id="weeks"></span> weeks<br />
+        <span id="days"></span> days<br />
+        <span id="hours"></span> hours<br />
+        <span id="minutes"></span> minutes<br />
+        <span id="seconds"></span> seconds
+      </div>
+    </div>
+
+    <!-- Name Animation -->
+    <div id="name-animation">
+      <div class="name-base">
+        <img src="font/Image0008 copy.png" />
+        <img src="font/Image0001 copy.png" />
+        <img src="font/Image0016 copy.png" />
+        <img src="font/Image0016 copy.png" />
+        <img src="font/Image0025 copy.png" />
+      </div>
+      <div id="name"></div>
     </div>
   </div>
-  <div style="white-space: nowrap;margin-left: 830px;display: flex;margin-top: 40px;">
-    <img src="font/Image0008 copy.png" height="60">
-    <img src="font/Image0001 copy.png" height="60" style="position: relative;left: -30px;">
-    <img src="font/Image0016 copy.png" height="60" style="position: relative;left: -60px;">
-    <img src="font/Image0016 copy.png" height="60" style="position: relative;left: -92px;">
-    <img src="font/Image0025 copy.png" height="60" style="position: relative;left: -125px;">
 
-    <img src="font/Image0002 copy.png" height="60" style="position: relative;left: -135px;">
-    <img src="font/Image0009 copy.png" height="60" style="position: relative;left: -173px;">
-    <img src="font/Image0018 copy.png" height="60" style="position: relative;left: -210px;">
-    <img src="font/Image0020 copy.png" height="60" style="position: relative;left: -243px;">
-    <img src="font/Image0008 copy.png" height="60" style="position: relative;left: -273px;">
-    <img src="font/Image0004 copy.png" height="60" style="position: relative;left: -303px;">
-    <img src="font/Image0001 copy.png" height="60" style="position: relative;left: -333px;">
-    <img src="font/Image0025 copy.png" height="60" style="position: relative;left: -363px;">
-
-    <div id="name">
-       
-    </div>
-    
-  </div>
-  
-
+  <!-- JavaScript -->
   <script>
-    let names=[
-      `
-        <img src="font/Image0019.png" height="60" style="position: relative;left: -365px;">
-        <img src="font/Image0001.png" height="60" style="position: relative;left: -395px;">
-        <img src="font/Image0018.png" height="60" style="position: relative;left: -425px;">
-        <img src="font/Image0001.png" height="60" style="position: relative;left: -455px;">
-        <img src="font/Image0004.png" height="60" style="position: relative;left: -485px;">
-        <img src="font/Image0001.png" height="60" style="position: relative;left: -515px;">
-      `,
-      `
-        <img src="font/Image0003.png" height="60" style="position: relative;left: -365px;">
-        <img src="font/Image0008.png" height="60" style="position: relative;left: -395px;">
-        <img src="font/Image0021.png" height="60" style="position: relative;left: -423px;">
-        <img src="font/Image0020.png" height="60" style="position: relative;left: -455px;">
-        <img src="font/Image0014.png" height="60" style="position: relative;left: -485px;">
-        <img src="font/Image0005.png" height="60" style="position: relative;left: -515px;">
-        <img src="font/Image0025.png" height="60" style="position: relative;left: -545px;">
-      `,
-      `
-        <img src="font/Image0019.png" height="60" style="position: relative;left: -365px;">
-        <img src="font/Image0021.png" height="60" style="position: relative;left: -395px;">
-        <img src="font/Image0002.png" height="60" style="position: relative;left: -425px;">
-        <img src="font/Image0002.png" height="60" style="position: relative;left: -455px;">
-        <img src="font/Image0021.png" height="60" style="position: relative;left: -483px;">
-      `,
-      `
-        <img src="font/Image0001.png" height="60" style="position: relative;left: -365px;">
-        <img src="font/Image0013.png" height="60" style="position: relative;left: -390px;">
-        <img src="font/Image0013.png" height="60" style="position: relative;left: -415px;">
-        <img src="font/Image0001.png" height="60" style="position: relative;left: -440px;">
-        <img src="font/Image0009.png" height="60" style="position: relative;left: -473px;">
-      `,
-      `
-        <img src="font/Image0005.png" height="60" style="position: relative;left: -365px;">
-        <img src="font/Image0018.png" height="60" style="position: relative;left: -395px;">
-        <img src="font/Image0018.png" height="60" style="position: relative;left: -425px;">
-        <img src="font/Image0009.png" height="60" style="position: relative;left: -460px;">
-        <span style="position: relative;left: -470px;top: -22px;font-size: xx-large;">🌸</span>
-      `,
-      `
-        <img src="icons/pig.png" height="75" style="position: relative;left: -365px;top: -13px;">
-      `,
-      `
-        <img src="icons/buffalo.png" height="75" style="position: relative;left: -365px;top: -13px;">
-      `,
-      `
-        <img src="icons/dog.png" height="75" style="position: relative;left: -365px;top: -13px;">
-      `
-    ]
-    let index=0;
-    setInterval(()=>{
-      let presentDay=new Date();
-      let bDay=new Date("2007-05-30T00:00:00");
-      let milleSeconds=presentDay-bDay;
+    // Fullscreen request + lock landscape on mobile
+    function requestFullScreen() {
+      const el = document.documentElement;
+      if (el.requestFullscreen) {
+        el.requestFullscreen().then(() => {
+          if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock("landscape").catch(console.warn);
+          }
+        });
+      }
+    }
 
-      let days=Math.floor(milleSeconds/(1000*60*60*24));
-      let weeks=Math.floor(days/7);
-      let months=Math.floor(days/30.44);
-      let years=Math.floor(days/365.25);
-      let hours=Math.floor(milleSeconds/(1000*60*60));
-      let minutes=Math.floor(milleSeconds/(1000*60));
-      let seconds=Math.floor(milleSeconds/1000);
+    const names = [
+      `
+        <img src="font/Image0019.png" />
+        <img src="font/Image0001.png" />
+        <img src="font/Image0018.png" />
+        <img src="font/Image0001.png" />
+        <img src="font/Image0004.png" />
+        <img src="font/Image0001.png" />
+      `,
+      `
+        <img src="font/Image0003.png" />
+        <img src="font/Image0008.png" />
+        <img src="font/Image0021.png" />
+        <img src="font/Image0020.png" />
+        <img src="font/Image0014.png" />
+        <img src="font/Image0005.png" />
+        <img src="font/Image0025.png" />
+      `,
+      `
+        <img src="icons/pig.png" style="height: 75px;" />
+      `,
+      `
+        <img src="icons/dog.png" style="height: 75px;" />
+      `
+    ];
 
-      let remHours=hours%24;
-      let remMinutes=minutes%60;
-      let remSeconds=seconds%60;
-      //console.log(days,remHours,remMinutes,remSeconds,seconds);
-      document.getElementById('day').innerText=`${days.toLocaleString('en-IN')}`;
-      document.getElementById('hrs').innerText=`${remHours.toLocaleString('en-IN')}`;
-      document.getElementById('min').innerText=`${remMinutes.toLocaleString('en-IN')}`;
-      document.getElementById('sec').innerText=`${remSeconds.toLocaleString('en-IN')}`;
-      document.getElementById('years').innerText=`${years.toLocaleString('en-IN')}`;
-      document.getElementById('months').innerText=`${months.toLocaleString('en-IN')}`;
-      document.getElementById('weeks').innerText=`${weeks.toLocaleString('en-IN')}`;
-      document.getElementById('days').innerText=`${days.toLocaleString('en-IN')}`;
-      document.getElementById('hours').innerText=`${hours.toLocaleString('en-IN')}`;
-      document.getElementById('minutes').innerText=`${minutes.toLocaleString('en-IN')}`;
-      document.getElementById('seconds').innerText=`${seconds.toLocaleString('en-IN')}`;
+    let index = 0;
+    setInterval(() => {
+      const now = new Date();
+      const bDay = new Date("2007-05-30T00:00:00");
+      const ms = now - bDay;
 
-      if(index==names.length) index=0;
-      document.getElementById('name').innerHTML=names[index++];
-    },1000);
+      const days = Math.floor(ms / (1000 * 60 * 60 * 24));
+      const weeks = Math.floor(days / 7);
+      const months = Math.floor(days / 30.44);
+      const years = Math.floor(days / 365.25);
+      const hours = Math.floor(ms / (1000 * 60 * 60));
+      const minutes = Math.floor(ms / (1000 * 60));
+      const seconds = Math.floor(ms / 1000);
+
+      const remHours = hours % 24;
+      const remMinutes = minutes % 60;
+      const remSeconds = seconds % 60;
+
+      document.getElementById("day").innerText = days.toLocaleString("en-IN");
+      document.getElementById("hrs").innerText = remHours.toLocaleString("en-IN");
+      document.getElementById("min").innerText = remMinutes.toLocaleString("en-IN");
+      document.getElementById("sec").innerText = remSeconds.toLocaleString("en-IN");
+
+      document.getElementById("years").innerText = years.toLocaleString("en-IN");
+      document.getElementById("months").innerText = months.toLocaleString("en-IN");
+      document.getElementById("weeks").innerText = weeks.toLocaleString("en-IN");
+      document.getElementById("days").innerText = days.toLocaleString("en-IN");
+      document.getElementById("hours").innerText = hours.toLocaleString("en-IN");
+      document.getElementById("minutes").innerText = minutes.toLocaleString("en-IN");
+      document.getElementById("seconds").innerText = seconds.toLocaleString("en-IN");
+
+      document.getElementById("name").innerHTML = names[index++ % names.length];
+    }, 1000);
   </script>
 </body>
 </html>
