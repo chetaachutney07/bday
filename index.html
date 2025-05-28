@@ -26,9 +26,14 @@
   </div>
   
   <script>
+    localStorage.removeItem("verified");
     function checker()
     {
-      if(document.getElementById('password').value.toLowerCase()=='chutney' && new Date()>=new Date("2025-05-30T00:00:00")) location.href='bday.html'
+      if(document.getElementById('password').value.toLowerCase()=='chutney' && new Date()>=new Date("2025-05-30T00:00:00"))
+      {
+        localStorage.setItem("verified","true");
+        location.href='bday.html';
+      }
       else if(document.getElementById('password').value.toLowerCase()=='chutney') location.href='waiting.html'
       else location.href='redirect.html';
     }
