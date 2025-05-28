@@ -130,6 +130,11 @@
   
 
   <script>
+    if(localStorage.getItem("verified")!=="true")
+    {
+      location.href='index.html';
+    }
+    else localStorage.removeItem('verified');
     let names=[
       `
         <img src="font/Image0019.png" height="60" style="position: relative;left: -365px;">
