@@ -81,11 +81,15 @@
 </head>
 <body>
 
-  <video id="bg-video" autoplay muted loop>
+  <div id="intro-message" style="height: 100vh; width: 100vw; display: flex; align-items: center; justify-content: center; background-color: black; color: #87CEEB; font-size: 24px; font-family: 'ChicariaDEMO'; text-align: center; cursor: pointer;">
+    <p>If you've made it this far, you must be <span style="color: #E55C5C;">Chetaa's Chutney!</span><br><span style="color: whitesmoke;">Tap anywhere 😉</span></p>
+  </div>
+
+  <video id="bg-video" autoplay muted loop style="display: none;">
     <source src="videos/small.mp4">
   </video>
 
-  <audio id="bg-music" loop autoplay>
+  <audio id="bg-music" loop>
     <source src="music/music.mp3">
   </audio>
 
@@ -130,6 +134,26 @@
   
 
   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+    const intro = document.getElementById("intro-message");
+    const content = document.getElementById("content");
+    const video = document.getElementById("bg-video");
+    const music = document.getElementById("bg-music");
+
+     
+    music.pause();
+    video.pause();
+
+     
+    intro.addEventListener("click", () => {
+      intro.style.display = "none";         
+      content.style.display = "block";      
+      video.style.display = "block";        
+
+      video.play();                         
+      music.play();                         
+    });
+  });
     window.addEventListener("pageshow", function (event) {
     if (event.persisted) {
         window.location.reload();
